@@ -9,4 +9,5 @@ services:
     environment:
       - OPENAI_API_HOST=http://gpu3.talic.hku.hk:3000
       - OPENAI_API_KEY=talic
+      - DEFAULT_MODEL=Meta-Llama-3-8B-Instruct-GGUF
       - DEFAULT_SYSTEM_PROMPT=You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content.
