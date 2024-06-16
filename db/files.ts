@@ -93,7 +93,8 @@ export const createFile = async (
 ) => {
   let validFilename = fileRecord.name.replace(/[^a-z0-9.]/gi, "_").toLowerCase()
   const extension = file.name.split(".").pop()
-  const baseName = validFilename.substring(0, validFilename.lastIndexOf("."))
+  const extensionIndex = validFilename.lastIndexOf(".")
+  const baseName = validFilename.substring(0, (extensionIndex < 0) ? undefined : extensionIndex)
   const maxBaseNameLength = 100 - (extension?.length || 0) - 1
   if (baseName.length > maxBaseNameLength) {
     fileRecord.name = baseName.substring(0, maxBaseNameLength) + "." + extension
@@ -138,7 +139,9 @@ export const createFile = async (
   if (!response.ok) {
     const jsonText = await response.text()
     const json = JSON.parse(jsonText)
-    console.error(`Error processing file:${createdFile.id}, status:${response.status}, response:${json.message}`)
+    console.error(
+      `Error processing file:${createdFile.id}, status:${response.status}, response:${json.message}`
+    )
     toast.error("Failed to process file. Reason:" + json.message, {
       duration: 10000
     })
@@ -200,7 +203,9 @@ export const createDocXFile = async (
   if (!response.ok) {
     const jsonText = await response.text()
     const json = JSON.parse(jsonText)
-    console.error(`Error processing file:${createdFile.id}, status:${response.status}, response:${json.message}`)
+    console.error(
+      `Error processing file:${createdFile.id}, status:${response.status}, response:${json.message}`
+    )
     toast.error("Failed to process file. Reason:" + json.message, {
       duration: 10000
     })
